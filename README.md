@@ -2,6 +2,8 @@
 
 <img width="3602" height="898" alt="image" src="https://github.com/user-attachments/assets/62d30469-a457-4dce-98cb-bce88cfad8b4" />
 
+Este projeto consiste na implementação de um pipeline de dados na AWS para ingestão automática de arquivos CSV enviados via SFTP, com posterior armazenamento em um banco de dados MySQL hospedado no RDS. O fluxo do pipeline é composto por várias etapas integradas: os arquivos são inicialmente recebidos através do SFTP e armazenados em um bucket S3, onde uma função Lambda é acionada para processar e preparar os dados. Em seguida, o AWS Glue realiza a transformação e o carregamento dos dados, que finalmente são inseridos no banco de dados RDS/MySQL.
+
 # Passo 1 — Ingestão via SFTP para S3
 
 ## Objetivo
@@ -22,13 +24,6 @@ cliente/data/arquivo.csv
 ### IAM Role
 - Garante que cada usuário só tenha acesso ao seu diretório no bucket S3.  
 - Controla permissões de **leitura** e **escrita** no prefixo configurado.  
-
-### Segurança e Auditoria
-- Os arquivos podem ser **criptografados automaticamente** (SSE-KMS).  
-- **Logs de acesso e transferência** ficam disponíveis no **CloudWatch** e no **CloudTrail**.  
-
-- **Versionamento** habilitado para manter histórico de alterações.
-- **Criptografia SSE-KMS** aplicada para segurança dos dados.
 
 ---
 
