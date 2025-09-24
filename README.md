@@ -1,6 +1,6 @@
 # Pipeline AWS ingestão de dados com SFTP
 
-<img width="3602" height="898" alt="image" src="https://github.com/user-attachments/assets/62d30469-a457-4dce-98cb-bce88cfad8b4" />
+<img width="1021" height="371" alt="image" src="https://github.com/user-attachments/assets/b6661866-02f1-444d-85d4-3a12d82b6e08" />
 
 Este projeto consiste na implementação de um pipeline de dados na AWS para ingestão automática de arquivos CSV enviados via SFTP, com posterior armazenamento em um banco de dados MySQL hospedado no RDS. O fluxo do pipeline é composto por várias etapas integradas: os arquivos são inicialmente recebidos através do SFTP e armazenados em um bucket S3, onde uma função Lambda é acionada para processar e preparar os dados. Em seguida, o AWS Glue realiza a transformação e o carregamento dos dados, que finalmente são inseridos no banco de dados RDS/MySQL.
 
