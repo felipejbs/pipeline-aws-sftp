@@ -89,10 +89,6 @@ Ler os arquivos **CSV** armazenados no **Amazon S3 (Landing Zone)**, realizar a 
   3. **Transformação** (ajuste de schema, enriquecimento, normalização).  
   4. **Preparação** para escrita no destino.  
 
-### Conexão via código (PySpark JDBC)
-- O Glue conecta-se ao **RDS MySQL** através de **JDBC**, definido diretamente no código.  
-- As credenciais são recuperadas de forma segura via **AWS Secrets Manager**.  
-
 ### Exemplo simplificado de código PySpark
 ```python
 import sys
