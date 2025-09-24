@@ -1,4 +1,4 @@
-# pipeline-aws-sftp
+# Pipeline AWS ingestão de dados com SFTP
 
 <img width="3602" height="898" alt="image" src="https://github.com/user-attachments/assets/62d30469-a457-4dce-98cb-bce88cfad8b4" />
 
@@ -26,3 +26,38 @@ cliente/data/arquivo.csv
 ### Segurança e Auditoria
 - Os arquivos podem ser **criptografados automaticamente** (SSE-KMS).  
 - **Logs de acesso e transferência** ficam disponíveis no **CloudWatch** e no **CloudTrail**.  
+
+- **Versionamento** habilitado para manter histórico de alterações.
+- **Criptografia SSE-KMS** aplicada para segurança dos dados.
+
+---
+
+# Passo 2. Disparo do Lambda
+
+- Um evento **S3:ObjectCreated** dispara uma função **AWS Lambda**.
+- Funções principais do Lambda:
+- Validar **metadados** (nome do arquivo, extensão).
+- Registrar no **DynamoDB** ou **CloudWatch Logs** que o arquivo chegou.
+- Invocar o **AWS Glue Job** passando parâmetros como `bucket`, `key` e `tabela_destino`.
+
+---
+
+# Passo 3. Processamento no Glue
+
+- **Glue Crawler (opcional)**: detecta o schema do CSV e mantém no **Glue Data Catalog**.
+- **Glue Job (Spark / PySpark)**:
+- Lê o arquivo bruto do S3.
+- Realiza **limpeza dos dados** (tipagem, remoção de nulos e duplicados).
+- Prepara o **DataFrame** para compatibilidade com o RDS MySQL.
+- Insere os dados no RDS/MySQL
+
+---
+
+# Passo 4. Armazenamento no RDS MySQL
+
+- O **Amazon RDS (MySQL)** recebe os dados tratados pelo Glue.
+- **Parâmetros de conexão** e senha são armazenados de forma segura no **AWS Secrets Manager**.
+- O pipeline garante que os dados sejam **ingestados de forma automatizada, segura e escalável**.
+
+---
+
